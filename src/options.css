@@ -1,0 +1,271 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f0f2f5;
+  min-height: 100vh;
+  padding: 32px 16px;
+  color: #222;
+}
+
+.settings-container {
+  max-width: 580px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  overflow: hidden;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────── */
+header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(135deg, #1a4a6e 0%, #3d7ea6 100%);
+  color: #fff;
+  padding: 22px 28px;
+}
+
+.header-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+header p {
+  font-size: 12px;
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* ── Panel ───────────────────────────────────────────────────────────── */
+.settings-panel {
+  padding: 0 28px 28px;
+}
+
+.setting-section {
+  padding: 22px 0 18px;
+  border-bottom: 1px solid #eef0f3;
+}
+
+.setting-section:last-child {
+  border-bottom: none;
+}
+
+.setting-section h2 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #3d7ea6;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+}
+
+.setting-item {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.setting-item:last-child {
+  margin-bottom: 0;
+}
+
+.setting-item label:not(.checkbox-label) {
+  font-size: 13px;
+  font-weight: 500;
+  color: #444;
+}
+
+.setting-item input[type="text"],
+.setting-item select {
+  padding: 9px 11px;
+  border: 1px solid #dde1e7;
+  border-radius: 7px;
+  font-size: 13px;
+  font-family: inherit;
+  background: #fafbfc;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.setting-item input[type="text"]:focus,
+.setting-item select:focus {
+  outline: none;
+  border-color: #3d7ea6;
+  box-shadow: 0 0 0 3px rgba(61,126,166,0.12);
+  background: #fff;
+}
+
+.setting-item small {
+  font-size: 11px;
+  color: #888;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #3d7ea6;
+  flex-shrink: 0;
+}
+
+/* ── Two-column row ──────────────────────────────────────────────────── */
+.setting-row {
+  display: flex;
+  gap: 14px;
+}
+
+.setting-row .setting-item {
+  flex: 1;
+}
+
+/* ── Color input ─────────────────────────────────────────────────────── */
+.color-input {
+  width: 100%;
+  height: 36px;
+  padding: 2px 4px;
+  border: 1px solid #dde1e7;
+  border-radius: 7px;
+  cursor: pointer;
+  background: #fafbfc;
+}
+
+/* ── Range with value label ──────────────────────────────────────────── */
+.range-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.range-row input[type="range"] {
+  flex: 1;
+  accent-color: #3d7ea6;
+}
+
+.range-val {
+  font-size: 12px;
+  font-weight: 600;
+  color: #3d7ea6;
+  min-width: 32px;
+  text-align: right;
+}
+
+/* ── About card ──────────────────────────────────────────────────────── */
+.about-card {
+  background: #f6f8fa;
+  border-radius: 8px;
+  border: 1px solid #e8eaed;
+  overflow: hidden;
+}
+
+.about-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  font-size: 13px;
+  border-bottom: 1px solid #e8eaed;
+}
+
+.about-row:last-child {
+  border-bottom: none;
+}
+
+.about-label {
+  color: #666;
+  font-weight: 500;
+}
+
+.about-card a {
+  color: #3d7ea6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.about-card a:hover {
+  text-decoration: underline;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────── */
+footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  background: #f6f8fa;
+  border-top: 1px solid #eef0f3;
+}
+
+.save-btn {
+  background: #3d7ea6;
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.save-btn:hover {
+  background: #2d6a8e;
+  box-shadow: 0 3px 10px rgba(61,126,166,0.25);
+}
+
+.reset-btn {
+  background: #fff;
+  color: #555;
+  border: 1px solid #dde1e7;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.reset-btn:hover {
+  background: #f0f2f5;
+}
+
+.status-msg {
+  flex: 1;
+  text-align: right;
+  font-size: 12px;
+  font-weight: 600;
+  color: transparent;
+  transition: color 0.2s;
+}
+
+.status-msg.success { color: #27ae60; }
+.status-msg.error   { color: #e74c3c; }
+
+/* ── Scrollbar ───────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 7px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #bbb; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #888; }
+

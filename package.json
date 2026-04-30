@@ -1,0 +1,17 @@
+{
+  "name": "PDF Tools",
+  "version": "1.0.0",
+  "description": "Enterprise PDF processing - password protection, digital signatures, compression, watermarks, and advanced security features",
+  "keywords": [
+    "pdf",
+    "tools",
+    "extension",
+    "browser",
+    "password",
+    "signature",
+    "encryption",
+    "watermark"
+  ],
+  "author": "Zozimus Technologies",
+  "license": "MIT"
+}

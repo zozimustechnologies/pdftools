@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Tools by Zozimus</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="app-header">
+      <h1>📄 PDF Tools</h1>
+    </header>
+
+    <nav class="menu-bar">
+      <button class="menu-btn active" data-menu="tools">📋 Tools</button>
+      <button class="menu-btn" data-menu="protect">🔒 Protect</button>
+      <button class="menu-btn" data-menu="sign">✍️ Sign</button>
+      <button class="menu-btn" data-menu="settings">⚙️ Settings</button>
+    </nav>
+
+    <!-- Tools Menu -->
+    <div id="tools" class="menu-content active">
+      <div class="tools-grid">
+        <div class="tool-card">
+          <span class="icon">📦</span>
+          <h3>Compress</h3>
+          <p>Reduce file size</p>
+          <button class="tool-btn" data-tool="compress">Start</button>
+        </div>
+        <div class="tool-card">
+          <span class="icon">✂️</span>
+          <h3>Extract Pages</h3>
+          <p>Extract specific pages</p>
+          <button class="tool-btn" data-tool="extract">Start</button>
+        </div>
+        <div class="tool-card">
+          <span class="icon">🔀</span>
+          <h3>Merge</h3>
+          <p>Combine multiple PDFs</p>
+          <button class="tool-btn" data-tool="merge">Start</button>
+        </div>
+        <div class="tool-card">
+          <span class="icon">↩️</span>
+          <h3>Rotate</h3>
+          <p>Rotate pages</p>
+          <button class="tool-btn" data-tool="rotate">Start</button>
+        </div>
+        <div class="tool-card">
+          <span class="icon">📑</span>
+          <h3>Split</h3>
+          <p>Split into pages</p>
+          <button class="tool-btn" data-tool="split">Start</button>
+        </div>
+        <div class="tool-card">
+          <span class="icon">🔄</span>
+          <h3>Convert</h3>
+          <p>Convert formats</p>
+          <button class="tool-btn" data-tool="convert">Start</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Protect Menu -->
+    <div id="protect" class="menu-content">
+      <div class="menu-list">
+        <button class="list-item" data-action="encrypt">
+          <span>🔐 Encrypt with Password</span>
+          <span class="arrow">›</span>
+        </button>
+        <button class="list-item" data-action="decrypt">
+          <span>🔓 Remove Password</span>
+          <span class="arrow">›</span>
+        </button>
+        <button class="list-item" data-action="permissions">
+          <span>📋 Set Permissions</span>
+          <span class="arrow">›</span>
+        </button>
+        <button class="list-item" data-action="watermark">
+          <span>💧 Add Watermark</span>
+          <span class="arrow">›</span>
+        </button>
+      </div>
+
+      <!-- Forms -->
+      <div class="form-container" id="encryptForm" style="display:none;">
+        <button class="back-btn">‹ Back</button>
+        <h2>Encrypt with Password</h2>
+        <div class="form-group">
+          <label for="userPassword">User Password:</label>
+          <input type="password" id="userPassword" placeholder="Password for opening">
+        </div>
+        <div class="form-group">
+          <label for="ownerPassword">Owner Password:</label>
+          <input type="password" id="ownerPassword" placeholder="Password for permissions">
+        </div>
+        <div class="form-group checkbox">
+          <input type="checkbox" id="printAllow" checked>
+          <label for="printAllow">Allow Printing</label>
+        </div>
+        <div class="form-group checkbox">
+          <input type="checkbox" id="copyAllow" checked>
+          <label for="copyAllow">Allow Content Copying</label>
+        </div>
+        <button class="action-btn" id="protectBtn">Encrypt PDF</button>
+      </div>
+
+      <div class="form-container" id="decryptForm" style="display:none;">
+        <button class="back-btn">‹ Back</button>
+        <h2>Remove Password</h2>
+        <div class="form-group">
+          <label for="decryptPassword">Password:</label>
+          <input type="password" id="decryptPassword" placeholder="Enter PDF password">
+        </div>
+        <button class="action-btn" id="decryptBtn">Decrypt PDF</button>
+      </div>
+
+      <div class="form-container" id="permissionsForm" style="display:none;">
+        <button class="back-btn">‹ Back</button>
+        <h2>Set Permissions</h2>
+        <div class="form-group">
+          <label for="permPassword">Password:</label>
+          <input type="password" id="permPassword" placeholder="Owner password">
+        </div>
+        <div class="form-group checkbox">
+          <input type="checkbox" id="permPrint" checked>
+          <label for="permPrint">Allow Printing</label>
+        </div>
+        <div class="form-group checkbox">
+          <input type="checkbox" id="permCopy" checked>
+          <label for="permCopy">Allow Copying</label>
+        </div>
+        <div class="form-group checkbox">
+          <input type="checkbox" id="permModify" checked>
+          <label for="permModify">Allow Modifications</label>
+        </div>
+        <button class="action-btn" id="permissionsBtn">Apply Permissions</button>
+      </div>
+
+      <div class="form-container" id="watermarkForm" style="display:none;">
+        <button class="back-btn">‹ Back</button>
+        <h2>Add Watermark</h2>
+        <div class="form-group">
+          <label for="watermarkText">Watermark Text:</label>
+          <input type="text" id="watermarkText" placeholder="e.g., CONFIDENTIAL">
+        </div>
+        <div class="form-group">
+          <label for="watermarkOpacity">Opacity:</label>
+          <input type="range" id="watermarkOpacity" min="10" max="100" value="30">
+        </div>
+        <button class="action-btn" id="watermarkBtn">Add Watermark</button>
+      </div>
+    </div>
+
+    <!-- Sign Menu -->
+    <div id="sign" class="menu-content">
+      <div class="form-group">
+        <label for="signatureName">Your Name:</label>
+        <input type="text" id="signatureName" placeholder="Full name">
+      </div>
+      <div class="form-group">
+        <label for="signatureReason">Reason:</label>
+        <input type="text" id="signatureReason" placeholder="e.g., Approved">
+      </div>
+      <div class="form-group">
+        <label for="signaturePage">Page Number:</label>
+        <input type="number" id="signaturePage" value="1" min="1">
+      </div>
+      <div class="form-group">
+        <label>Draw Signature:</label>
+        <canvas id="signatureCanvas" class="signature-canvas"></canvas>
+        <button class="clear-btn" id="clearSignature">Clear</button>
+      </div>
+      <div class="form-group checkbox">
+        <input type="checkbox" id="timestampSign" checked>
+        <label for="timestampSign">Add Timestamp</label>
+      </div>
+      <button class="action-btn" id="signBtn">Sign PDF</button>
+    </div>
+
+    <!-- Settings Menu -->
+    <div id="settings" class="menu-content">
+      <div class="form-group checkbox">
+        <input type="checkbox" id="enableNotifications" checked>
+        <label for="enableNotifications">Enable Notifications</label>
+      </div>
+      <div class="form-group checkbox">
+        <input type="checkbox" id="autoDownload" checked>
+        <label for="autoDownload">Auto-download Results</label>
+      </div>
+      <div class="form-group">
+        <label for="defaultQuality">Compression Quality:</label>
+        <select id="defaultQuality">
+          <option value="low">Low (Smallest)</option>
+          <option value="medium" selected>Medium</option>
+          <option value="high">High (Best Quality)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="defaultLanguage">Language:</label>
+        <select id="defaultLanguage">
+          <option value="en" selected>English</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+        </select>
+      </div>
+      <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
+      <button class="action-btn secondary" id="aboutBtn">About</button>
+      <button class="action-btn secondary" id="helpBtn">Help</button>
+    </div>
+
+    <div id="status" class="status-message"></div>
+
+  <script src="../lib/crypto-js.min.js"></script>
+  <script src="../lib/pdf-lib.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

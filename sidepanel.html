@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Tools</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <div class="container">
+    <header class="app-header">
+      <img src="icons/icon-48.png" alt="PDF Tools logo" class="app-logo">
+      <h1>PDF Tools</h1>
+      <a class="donate-btn" href="https://wise.com/pay/business/sandeepchadda?utm_source=open_link" target="_blank" rel="noopener noreferrer">❤ Donate</a>
+      <button class="settings-icon-btn" id="openOptionsBtn" title="Settings" aria-label="Open settings">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </button>
+    </header>
+
+    <nav class="menu-bar">
+      <button class="menu-btn active" data-menu="tools">Tools</button>
+      <button class="menu-btn" data-menu="protect">Protect</button>
+      <button class="menu-btn" data-menu="sign">Sign</button>
+      <button class="menu-btn" data-menu="info">Info</button>
+      <button class="menu-btn" data-menu="settings">Settings</button>
+    </nav>
+
+    <!-- Persistent PDF loader bar (shared across all tabs) -->
+    <div class="pdf-loader-bar">
+      <label class="pdf-loader-bar__file" for="pdfFileInput" title="Click to choose a PDF file">
+        <span id="fileLoaderIcon">📂</span>
+        <span id="fileLoaderText">Choose a PDF file…</span>
+      </label>
+      <input type="file" id="pdfFileInput" accept=".pdf" style="display:none;">
+      <button class="use-tab-btn" id="useTabBtn">&#x1F4E5; Use Current Tab</button>
+    </div>
+
+    <!-- Encrypted PDF warning banner -->
+    <div id="encWarning" class="enc-warning" style="display:none;">
+      <span>&#x26A0;&#xFE0F; Encrypted PDF &#8212; not all functions will work with the opening (user) password only.</span>
+      <button class="enc-warning__dismiss" id="encWarningDismiss" aria-label="Dismiss">&#x2715;</button>
+    </div>
+
+    <!-- Tools Menu -->
+    <div id="tools" class="menu-content active">
+
+      <!-- PDF File Loader removed (now in shared bar above) -->
+
+      <div class="tools-grid">
+        <div class="tool-card">
+          <span class="icon">✂️</span>
+          <h3>Extract Pages</h3>
+          <p>Extract specific pages</p>
+          <button class="tool-btn" data-tool="extract">Start</button>
+        </div>
+        <div class="tool-card">
+          <span class="icon">🔀</span>
+          <h3>Merge</h3>
+          <p>Combine multiple PDFs</p>
+          <button class="tool-btn" data-tool="merge">Start</button>
+        </div>
+        <div class="tool-card">
+          <span class="icon">↩️</span>
+          <h3>Rotate</h3>
+          <p>Rotate pages</p>
+          <button class="tool-btn" data-tool="rotate">Start</button>
+        </div>
+        <div class="tool-card">
+          <span class="icon">📑</span>
+          <h3>Split</h3>
+          <p>Split into pages</p>
+          <button class="tool-btn" data-tool="split">Start</button>
+        </div>
+        <div class="tool-card">
+          <span class="icon">📝</span>
+          <h3>Edit Metadata</h3>
+          <p>Edit file information</p>
+          <button class="tool-btn" data-tool="metadata">Start</button>
+        </div>
+      </div>
+      <div class="tool-panel" id="panel-extract" style="display:none;">
+        <button class="back-btn tool-panel__back">‹ Back</button>
+        <h3 class="section-title">Extract Pages</h3>
+        <div class="form-group">
+          <label for="extractRange">Pages (e.g. 1, 3, 5-8):</label>
+          <input type="text" id="extractRange" placeholder="1-3, 5, 7">
+        </div>
+        <button class="action-btn" id="runExtract">Extract &amp; Download</button>
+      </div>
+
+      <div class="tool-panel" id="panel-merge" style="display:none;">
+        <button class="back-btn tool-panel__back">‹ Back</button>
+        <h3 class="section-title">Merge PDFs</h3>
+        <p class="tool-hint">The loaded PDF will be first. Select additional PDFs to append.</p>
+        <div class="form-group">
+          <label for="mergeFiles">Additional PDFs:</label>
+          <input type="file" id="mergeFiles" accept=".pdf" multiple>
+        </div>
+        <button class="action-btn" id="runMerge">Merge &amp; Download</button>
+      </div>
+
+      <div class="tool-panel" id="panel-rotate" style="display:none;">
+        <button class="back-btn tool-panel__back">‹ Back</button>
+        <h3 class="section-title">Rotate Pages</h3>
+        <div class="form-group">
+          <label for="rotateDeg">Rotation:</label>
+          <select id="rotateDeg">
+            <option value="90">90° Clockwise</option>
+            <option value="180">180°</option>
+            <option value="270">90° Counter-clockwise</option>
+          </select>
+        </div>
+        <button class="action-btn" id="runRotate">Rotate &amp; Download</button>
+      </div>
+
+      <div class="tool-panel" id="panel-split" style="display:none;">
+        <button class="back-btn tool-panel__back">‹ Back</button>
+        <h3 class="section-title">Split PDF</h3>
+        <p class="tool-hint">Downloads each page as a separate PDF file.</p>
+        <button class="action-btn" id="runSplit">Split &amp; Download All</button>
+      </div>
+
+      <div class="tool-panel" id="panel-metadata" style="display:none;">
+        <button class="back-btn tool-panel__back">‹ Back</button>
+        <h3 class="section-title">Edit File Information</h3>
+        <div class="form-group">
+          <label for="metaTitle">Title:</label>
+          <input type="text" id="metaTitle" placeholder="Document title">
+        </div>
+        <div class="form-group">
+          <label for="metaAuthor">Author:</label>
+          <input type="text" id="metaAuthor" placeholder="Author name">
+        </div>
+        <div class="form-group">
+          <label for="metaSubject">Subject:</label>
+          <input type="text" id="metaSubject" placeholder="Subject or description">
+        </div>
+        <div class="form-group">
+          <label for="metaKeywords">Keywords:</label>
+          <input type="text" id="metaKeywords" placeholder="comma, separated, keywords">
+        </div>
+        <div class="form-group">
+          <label for="metaCreator">Creator:</label>
+          <input type="text" id="metaCreator" placeholder="Application that created the PDF">
+        </div>
+        <div class="form-group">
+          <label for="metaProducer">Producer:</label>
+          <input type="text" id="metaProducer" placeholder="PDF producer">
+        </div>
+        <button class="action-btn" id="runMetadata">Save &amp; Download</button>
+      </div>
+
+
+
+    </div>
+
+    <!-- Protect Menu -->
+    <div id="protect" class="menu-content">
+      <div class="menu-list">
+        <button class="list-item" data-action="encrypt">
+          <span>🔐 Encrypt with Password</span>
+          <span class="arrow">›</span>
+        </button>
+        <button class="list-item" data-action="decrypt">
+          <span>🔓 Remove Password</span>
+          <span class="arrow">›</span>
+        </button>
+        <button class="list-item" data-action="watermark">
+          <span>💧 Add Watermark</span>
+          <span class="arrow">›</span>
+        </button>
+      </div>
+
+      <!-- Forms -->
+      <div class="form-container" id="encryptForm" style="display:none;">
+        <button class="back-btn">‹ Back</button>
+        <h2>Encrypt with Password</h2>
+        <div class="form-group">
+          <label for="userPassword">User Password:</label>
+          <input type="password" id="userPassword" placeholder="Password for opening">
+        </div>
+        <div class="form-group">
+          <label for="ownerPassword">Owner Password:</label>
+          <input type="password" id="ownerPassword" placeholder="Password for permissions (optional)">
+        </div>
+        <div class="perm-group">
+          <div class="perm-group__title">Permissions</div>
+          <label class="perm-item"><input type="checkbox" id="encPrint" checked> Printing</label>
+          <label class="perm-item"><input type="checkbox" id="encModify"> Editing file content</label>
+          <label class="perm-item"><input type="checkbox" id="encCopy"> Content copying</label>
+          <label class="perm-item"><input type="checkbox" id="encAccessibility" checked> Content copying for accessibility</label>
+          <label class="perm-item"><input type="checkbox" id="encAnnotate" checked> Commenting</label>
+          <label class="perm-item"><input type="checkbox" id="encForms" checked> Filling form fields</label>
+          <label class="perm-item"><input type="checkbox" id="encAssembly"> Signing</label>
+        </div>
+        <button class="action-btn" id="protectBtn">Encrypt PDF</button>
+      </div>
+
+      <div class="form-container" id="decryptForm" style="display:none;">
+        <button class="back-btn">‹ Back</button>
+        <h2>Remove Password</h2>
+        <div class="form-group">
+          <label for="decryptPassword">Password:</label>
+          <input type="password" id="decryptPassword" placeholder="Enter PDF password">
+        </div>
+        <button class="action-btn" id="decryptBtn">Decrypt PDF</button>
+      </div>
+
+      <div class="form-container" id="watermarkForm" style="display:none;">
+        <button class="back-btn">‹ Back</button>
+        <h2>Add Watermark</h2>
+        <div class="form-group">
+          <label for="watermarkText">Watermark Text:</label>
+          <input type="text" id="watermarkText" placeholder="e.g., CONFIDENTIAL">
+        </div>
+        <div class="form-row">
+          <div class="form-group form-row__item">
+            <label for="watermarkFontSize">Font Size: <span id="watermarkFontSizeVal">Auto</span></label>
+            <input type="range" id="watermarkFontSize" min="0" max="120" step="4" value="0">
+          </div>
+          <div class="form-group form-row__item">
+            <label for="watermarkColor">Color:</label>
+            <input type="color" id="watermarkColor" value="#3d7ea6" class="color-input">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="watermarkPlacement">Placement:</label>
+          <select id="watermarkPlacement">
+            <option value="center" selected>Center (diagonal)</option>
+            <option value="tile">Tiled (diagonal)</option>
+            <option value="top-left">Top Left</option>
+            <option value="top-center">Top Center</option>
+            <option value="top-right">Top Right</option>
+            <option value="bottom-left">Bottom Left</option>
+            <option value="bottom-center">Bottom Center</option>
+            <option value="bottom-right">Bottom Right</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="watermarkOpacity">Opacity: <span id="watermarkOpacityVal">30%</span></label>
+          <input type="range" id="watermarkOpacity" min="5" max="100" value="30">
+        </div>
+        <div class="wm-preview-wrap">
+          <div class="wm-preview-label">Preview</div>
+          <canvas id="watermarkPreview" class="wm-preview"></canvas>
+        </div>
+        <button class="action-btn" id="watermarkBtn">Add Watermark</button>
+      </div>
+    </div>
+
+    <!-- Sign Menu -->
+    <div id="sign" class="menu-content">
+      <div class="form-section">
+        <h3 class="section-title">Signer Details</h3>
+        <div class="form-group">
+          <label for="signatureName">Your Name:</label>
+          <input type="text" id="signatureName" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label for="signatureReason">Reason:</label>
+          <input type="text" id="signatureReason" placeholder="e.g., Approved">
+        </div>
+        <div class="form-group">
+          <label for="signaturePage">Page Number:</label>
+          <input type="number" id="signaturePage" value="1" min="1">
+        </div>
+      </div>
+      <div class="form-section">
+        <h3 class="section-title">Draw Signature</h3>
+        <div class="form-group">
+          <div class="sig-canvas-wrap">
+            <canvas id="signatureCanvas" class="signature-canvas"></canvas>
+            <div class="sig-canvas-hint" id="sigCanvasHint">Click to start signing — press Esc to stop</div>
+          </div>
+          <button class="clear-btn" id="clearSignature">Clear</button>
+        </div>
+      </div>
+      <div class="form-section">
+        <h3 class="section-title">Signature Preview</h3>
+        <div class="sig-preview" id="sigPreview">
+          <div class="sig-preview__drawing" id="sigPreviewDrawing">
+            <span class="sig-preview__drawing-empty">Draw signature above</span>
+          </div>
+          <div class="sig-preview__box">
+            <div class="sig-preview__name" id="sigPreviewName">Your Name</div>
+            <div class="sig-preview__reason" id="sigPreviewReason">Reason: —</div>
+            <div class="sig-preview__ts" id="sigPreviewTs"></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <h3 class="section-title">Customise</h3>
+        <div class="sig-custom-grid">
+          <div class="sig-custom-row">
+            <label for="sigInkColor">Ink</label>
+            <input type="color" id="sigInkColor" value="#1a4a6e">
+          </div>
+          <div class="sig-custom-row">
+            <label for="sigBorderColor">Border</label>
+            <input type="color" id="sigBorderColor" value="#3d7ea6">
+          </div>
+          <div class="sig-custom-row">
+            <label for="sigDrawBg">Drawing bg</label>
+            <input type="color" id="sigDrawBg" value="#f7fbfd">
+          </div>
+          <div class="sig-custom-row">
+            <label for="sigBoxBg">Info bg</label>
+            <input type="color" id="sigBoxBg" value="#eef6fb">
+          </div>
+          <div class="sig-custom-row">
+            <label for="sigNameColor">Name</label>
+            <input type="color" id="sigNameColor" value="#1a4a6e">
+          </div>
+          <div class="sig-custom-row sig-custom-row--wide">
+            <label for="sigRadius">Roundness <span id="sigRadiusVal">16</span>px</label>
+            <input type="range" id="sigRadius" min="0" max="32" value="16">
+          </div>
+          <div class="sig-custom-row sig-custom-row--wide">
+            <div class="form-group checkbox" style="margin:0">
+              <input type="checkbox" id="timestampSign" checked>
+              <label for="timestampSign">Add Timestamp</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="padding: 0 12px;">
+        <button class="action-btn" id="signBtn">Sign PDF</button>
+      </div>
+    </div>
+
+    <!-- Info Menu -->
+    <div id="info" class="menu-content">
+      <div class="form-section">
+        <h3 class="section-title">File Info</h3>
+        <div id="infoNoFile" class="info-empty">No PDF loaded yet.</div>
+        <table class="info-table" id="infoTable" style="display:none;">
+          <tbody>
+            <tr><td class="info-label">File Name</td><td id="iName">—</td></tr>
+            <tr><td class="info-label">File Size</td><td id="iSize">—</td></tr>
+            <tr><td class="info-label">Pages</td><td id="iPages">—</td></tr>
+            <tr><td class="info-label">PDF Version</td><td id="iVersion">—</td></tr>
+            <tr><td class="info-label">Encrypted</td><td id="iEncrypted">—</td></tr>
+          </tbody>
+          <tbody id="infoPermsSection" style="display:none;">
+            <tr class="info-section-header"><td colspan="2">Permissions</td></tr>
+            <tr><td class="info-label">Access level</td><td id="iAccessLevel">—</td></tr>
+            <tr><td class="info-label">Printing</td><td id="iPrint">—</td></tr>
+            <tr><td class="info-label">Edit contents</td><td id="iModify">—</td></tr>
+            <tr><td class="info-label">Copy text</td><td id="iCopy">—</td></tr>
+            <tr><td class="info-label">Accessibility copy</td><td id="iAccessibility">—</td></tr>
+            <tr><td class="info-label">Commenting</td><td id="iAnnotate">—</td></tr>
+            <tr><td class="info-label">Fill forms</td><td id="iFillForms">—</td></tr>
+            <tr><td class="info-label">Assembly</td><td id="iAssembly">—</td></tr>
+          </tbody>
+          <tbody>
+            <tr><td class="info-label">Title</td><td id="iTitle">—</td></tr>
+            <tr><td class="info-label">Author</td><td id="iAuthor">—</td></tr>
+            <tr><td class="info-label">Subject</td><td id="iSubject">—</td></tr>
+            <tr><td class="info-label">Creator</td><td id="iCreator">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Settings Menu -->
+    <div id="settings" class="menu-content">
+      <div class="form-section">
+        <h3 class="section-title">Preferences</h3>
+        <div class="form-group checkbox">
+          <input type="checkbox" id="enableNotifications" checked>
+          <label for="enableNotifications">Enable Notifications</label>
+        </div>
+        <div class="form-group checkbox">
+          <input type="checkbox" id="autoDownload" checked>
+          <label for="autoDownload">Auto-download Results</label>
+        </div>
+        <div class="form-group">
+          <label for="defaultLanguage">Language:</label>
+          <select id="defaultLanguage">
+            <option value="en" selected>English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-section">
+        <h3 class="section-title">Support</h3>
+        <p style="font-size:12px; color:#666; margin-bottom:12px;">
+          <a href="mailto:zozimustechnologies@outlook.com" style="color:#3d7ea6; text-decoration:none;">zozimustechnologies@outlook.com</a>
+        </p>
+        <button class="action-btn secondary" id="aboutBtn">About</button>
+        <button class="action-btn secondary" id="helpBtn">Help</button>
+      </div>
+    </div>
+
+    <div id="status" class="status-message"></div>
+
+    <!-- Download bar: shown after a successful operation -->
+    <div id="downloadBar" class="download-bar" style="display:none;">
+      <span class="download-bar__label" id="downloadLabel">Processed PDF ready</span>
+      <button class="download-bar__btn" id="downloadBtn">⬇ Download PDF</button>
+    </div>
+
+    <footer class="app-footer">
+      &copy; <a href="https://zozimustechnologies.github.io/" target="_blank" rel="noopener noreferrer">Zozimus Technologies</a>. All rights reserved.
+    </footer>
+
+  </div><!-- /.container -->
+
+  <!-- Password Modal -->
+  <div id="passwordModal" class="pwd-modal" style="display:none;">
+    <div class="pwd-modal__box">
+      <div class="pwd-modal__icon">🔐</div>
+      <h3 class="pwd-modal__title">Encrypted PDF</h3>
+      <p class="pwd-modal__desc">Enter the password to unlock. It will be re-encrypted on download.</p>
+      <input type="password" id="passwordModalInput" class="pwd-modal__input" placeholder="Password" autocomplete="current-password">
+      <div class="pwd-modal__err" id="passwordModalErr"></div>
+      <div class="pwd-modal__btns">
+        <button class="pwd-modal__cancel" id="passwordModalCancel">Cancel</button>
+        <button class="pwd-modal__ok" id="passwordModalOk">Unlock</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="lib/pdf.min.js"></script>
+  <script src="lib/crypto-js.min.js"></script>
+  <script src="lib/pdf-lib.min.js"></script>
+  <script src="sidepanel.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Tools — Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="settings-container">
+
+    <header>
+      <img src="../icons/icon-48.png" alt="" class="header-logo">
+      <div>
+        <h1>PDF Tools</h1>
+        <p>by Zozimus Technologies</p>
+      </div>
+    </header>
+
+    <div class="settings-panel">
+
+      <!-- General -->
+      <section class="setting-section">
+        <h2>⚙️ General</h2>
+        <div class="setting-item">
+          <label class="checkbox-label">
+            <input type="checkbox" id="autoDownload" checked>
+            <span>Auto-download processed PDFs</span>
+          </label>
+          <small>When enabled, results are downloaded immediately after processing.</small>
+        </div>
+        <div class="setting-item">
+          <label class="checkbox-label">
+            <input type="checkbox" id="enableNotifications" checked>
+            <span>Show status notifications</span>
+          </label>
+          <small>Display success and error messages in the side panel.</small>
+        </div>
+      </section>
+
+      <!-- Compression -->
+      <!-- Watermark Defaults -->
+      <section class="setting-section">
+        <h2>💧 Watermark Defaults</h2>
+        <div class="setting-item">
+          <label for="defaultWatermarkText">Default watermark text:</label>
+          <input type="text" id="defaultWatermarkText" placeholder="e.g., CONFIDENTIAL">
+        </div>
+        <div class="setting-row">
+          <div class="setting-item">
+            <label for="defaultWatermarkColor">Default color:</label>
+            <input type="color" id="defaultWatermarkColor" value="#3d7ea6" class="color-input">
+          </div>
+          <div class="setting-item">
+            <label for="defaultWatermarkOpacity">Default opacity:</label>
+            <div class="range-row">
+              <input type="range" id="defaultWatermarkOpacity" min="5" max="100" value="30">
+              <span class="range-val" id="defaultWatermarkOpacityVal">30%</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Signature Defaults -->
+      <section class="setting-section">
+        <h2>✍️ Signature Defaults</h2>
+        <div class="setting-item">
+          <label for="defaultSignatureName">Default signer name:</label>
+          <input type="text" id="defaultSignatureName" placeholder="Your full name">
+        </div>
+        <div class="setting-item">
+          <label for="defaultSignatureReason">Default reason:</label>
+          <input type="text" id="defaultSignatureReason" placeholder="e.g., Approved">
+        </div>
+      </section>
+
+      <!-- About -->
+      <section class="setting-section setting-section--about">
+        <h2>ℹ️ About</h2>
+        <div class="about-card">
+          <div class="about-row">
+            <span class="about-label">Version</span>
+            <span id="aboutVersion">1.0.0</span>
+          </div>
+          <div class="about-row">
+            <span class="about-label">Developer</span>
+            <a href="https://zozimustechnologies.github.io/" target="_blank" rel="noopener">Zozimus Technologies</a>
+          </div>
+          <div class="about-row">
+            <span class="about-label">Support</span>
+            <a href="mailto:zozimustechnologies@outlook.com">zozimustechnologies@outlook.com</a>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /.settings-panel -->
+
+    <footer>
+      <button id="saveBtn" class="save-btn">✓ Save Settings</button>
+      <button id="resetBtn" class="reset-btn">Reset to Defaults</button>
+      <div id="statusMsg" class="status-msg"></div>
+    </footer>
+
+  </div><!-- /.settings-container -->
+
+  <script src="options.js"></script>
+</body>
+</html>
