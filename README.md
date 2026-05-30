@@ -42,6 +42,8 @@ PDF Tools is available on the **Microsoft Edge Add-on Store**.
 3. Click **"Get"** and confirm the installation
 4. The PDF Tools icon will appear in your browser toolbar — click it to open the side panel
 
+**🌐 Website:** [zozimustechnologies.github.io/pdftools](https://zozimustechnologies.github.io/pdftools/)
+
 ## 🔒 Privacy
 
 - **Zero uploads** — All processing runs in your browser using [PDF-lib](https://pdf-lib.js.org/) and [PDF.js](https://mozilla.github.io/pdf.js/)
