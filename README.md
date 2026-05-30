@@ -1,32 +1,37 @@
-# 📄 PDF Tools - Browser Extension
+# 📄 PDF Tools — Browser Extension by Zozimus Technologies
 
-A comprehensive and powerful browser extension for PDF manipulation with advanced security features, digital signatures, and document management tools.
+A privacy-first, full-featured PDF toolkit built into the Microsoft Edge side panel. Password protect, sign, watermark, merge, split, rotate, and extract PDF pages — all processed **100% locally** with no uploads.
 
 ## ✨ Features
 
 ### 🔧 PDF Tools
-- **Compress PDF** - Reduce file size while maintaining quality
-- **Extract Pages** - Extract specific pages from your PDF
-- **Merge PDFs** - Combine multiple PDFs into a single document
-- **Rotate Pages** - Rotate pages 90° in any direction
-- **Split PDF** - Split PDF into individual pages
-- **Convert Format** - Convert PDF to/from other formats
+- **Extract Pages** — Extract specific pages by number or range
+- **Merge PDFs** — Combine multiple PDFs into a single document
+- **Rotate Pages** — Rotate pages 90°, 180°, or 270°
+- **Split PDF** — Separate every page into its own file
+- **Edit Metadata** — Update title, author, subject, keywords, and more
 
-### 🔒 Security Features
-- **Password Protection** - Encrypt PDFs with user and owner passwords
-- **Permissions Control** - Control printing, copying, and editing permissions
-- **Decrypt PDFs** - Remove password protection from encrypted PDFs
-- **Digital Signatures** - Add cryptographic signatures to PDFs
-- **Timestamp Support** - Add timestamps to signature operations
-- **Watermarks** - Add custom watermarks with adjustable opacity
-- **Stamps** - Add approval, draft, confidential, and urgent stamps
+### 🔒 Security & Protection
+- **Password Protection** — AES-256 encryption with separate user and owner passwords
+- **Granular Permissions** — Control printing, copying, editing, annotations, and form filling
+- **Decrypt PDFs** — Remove password protection from PDFs you own
+- **Watermarks** — Custom text, opacity, placement, font size, and colour with live preview
+
+### ✍️ Digital Signatures
+- **Draw Your Signature** — Sign directly in the panel using mouse or touch
+- **Signature Metadata** — Attach your name, reason, and page number
+- **Timestamp Support** — Add an authoritative timestamp to every signature
+- **Full Customisation** — Ink colour, border, background, and roundness
+
+### 📋 Document Information
+- **File Info** — Page count, PDF version, file size, and encryption status
+- **Permission Summary** — See exactly what operations the PDF allows
 
 ### 🎨 User Interface
-- **Modern Menu Bar** - Clean, intuitive navigation with dropdown menus
-- **Dark/Light Theme** - Customizable appearance preferences
-- **Real-time Notifications** - Get instant feedback on operations
-- **Settings Panel** - Comprehensive configuration options
-- **Responsive Design** - Works perfectly on all screen sizes
+- **Side Panel UI** — Works alongside any webpage without leaving your tab
+- **Brand Theme** — Clean blue gradient design by Zozimus Technologies
+- **Real-time Notifications** — Instant feedback on every operation
+- **Settings Panel** — Auto-download, notifications, and language preferences
 
 ## 🚀 Installation
 
@@ -35,184 +40,136 @@ PDF Tools is available on the **Microsoft Edge Add-on Store**.
 1. Open Microsoft Edge and visit the [Edge Add-on Store](https://microsoftedge.microsoft.com/addons/)
 2. Search for **"PDF Tools by Zozimus Technologies"**
 3. Click **"Get"** and confirm the installation
-4. The PDF Tools icon will appear in your browser toolbar
+4. The PDF Tools icon will appear in your browser toolbar — click it to open the side panel
+
+## 🔒 Privacy
+
+- **Zero uploads** — All processing runs in your browser using [PDF-lib](https://pdf-lib.js.org/) and [PDF.js](https://mozilla.github.io/pdf.js/)
+- **No accounts** — No sign-in, no tracking, no analytics
+- **No external servers** — Documents never leave your device
 
 ## 📋 Project Structure
 
 ```
 pdftools/
-├── manifest.json              # Extension configuration
-├── LICENSE                    # License file
-├── README.md                  # This file
+├── manifest.json              # Extension configuration (Manifest V3)
+├── background.js              # Service worker (side panel launcher)
+├── content.js                 # Content script
+├── sidepanel.html/css/js      # Main side panel UI
 ├── src/
-│   ├── popup.html            # Main popup UI (menu bar)
-│   ├── popup.css             # Popup styling
-│   ├── popup.js              # Popup functionality
-│   ├── background.js         # Service worker
-│   ├── content.js            # Content script
-│   ├── options.html          # Settings page
-│   ├── options.css           # Settings styling
-│   ├── options.js            # Settings functionality
-│   └── utils.js              # Utility functions
-├── lib/                      # External libraries
-│   ├── pdf-lib.min.js       # PDF manipulation library
-│   ├── pdf.min.js           # PDF.js viewer
-│   ├── pdf.worker.min.js    # PDF.js worker
-│   └── crypto-js.min.js     # Cryptography library
-├── assets/
-│   ├── icons/
-│   │   ├── icon-16.png      # Extension icon (16x16)
-│   │   ├── icon-48.png      # Extension icon (48x48)
-│   │   └── icon-128.png     # Extension icon (128x128)
-│   └── screenshots/         # Store listing screenshots
-└── docs/                    # Documentation
-    ├── API.md               # API documentation
-    ├── CONTRIBUTING.md      # Contribution guidelines
-    └── SECURITY.md          # Security policy
+│   ├── popup.html/css/js      # Popup UI
+│   ├── background.js          # Service worker source
+│   ├── content.js             # Content script source
+│   ├── options.html/css/js    # Settings page
+│   └── utils.js               # Shared utility functions
+├── lib/                       # Bundled open-source libraries
+│   ├── pdf-lib.min.js        # PDF manipulation
+│   ├── pdf.min.js            # PDF.js viewer
+│   ├── pdf.worker.min.js     # PDF.js worker
+│   └── crypto-js.min.js      # AES-256 encryption
+├── icons/                     # Extension icons (PNG)
+├── storeassets/               # Edge Add-on Store submission assets
+│   ├── extensionlogo-300x300.png
+│   ├── smallpromotionaltile-440x280.png
+│   ├── largepromotionaltile-1400x560.png
+│   ├── screenshot-1280x800.png
+│   ├── screenshot-640x400.png
+│   └── description.md        # Store listing copy
+├── scripts/
+│   └── generate-store-assets.js  # Puppeteer asset generator
+└── docs/
+    ├── API.md                 # API documentation
+    └── SECURITY.md            # Security policy
 ```
 
-
-### File Descriptions
-
-#### Core Files
-- **manifest.json** - Defines extension metadata, permissions, and entry points
-- **popup.html/js/css** - Main UI with menu bar navigation
-- **background.js** - Service worker for handling background tasks
-- **content.js** - Injects functionality into web pages
-
-#### Options & Settings
-- **options.html/js/css** - Settings page accessible from extension menu
-- **utils.js** - Shared utility functions for PDF operations
-
-#### Assets
-- **icons/** - Extension icons (must be PNG format)
-- **screenshots/** - Extension store listing images
-
 ### Key Technologies
-- **Manifest V3** - Latest browser extension specification
-- **PDF-lib** - JavaScript PDF manipulation
-- **PDF.js** - PDF rendering and parsing
-- **Crypto-JS** - Encryption and password handling
-- **WebExtension APIs** - Storage, tabs, messaging
+- **Manifest V3** — Latest browser extension specification
+- **PDF-lib** — JavaScript PDF manipulation
+- **PDF.js** — PDF rendering and parsing
+- **Crypto-JS** — AES-256 encryption and password handling
+- **WebExtension APIs** — Storage, tabs, messaging, side panel
+- **Puppeteer** — Store asset generation (dev only)
 
 ## 📖 Usage
 
-### Basic Operations
+### Protect a PDF with a Password
+1. Load a PDF using the file picker or "Use Current Tab"
+2. Click the **Protect** tab → **Encrypt with Password**
+3. Enter a user password (required to open) and optionally an owner password
+4. Set granular permissions (print, copy, edit, annotate, etc.)
+5. Click **Encrypt PDF** — the file downloads automatically
 
-#### 1. Password Protection
-1. Click "Security" → "Add Password"
-2. Enter user password (required to open)
-3. Optionally set owner password (for permissions)
-4. Choose permissions (printing, copying, editing)
-5. Click "Encrypt PDF"
+### Add a Digital Signature
+1. Load a PDF and click the **Sign** tab
+2. Enter your name, reason, and target page number
+3. Draw your signature in the canvas
+4. Customise ink colour, border, and roundness
+5. Click **Sign PDF**
 
-#### 2. Digital Signature
-1. Click "Sign & Stamp" → "Add Signature"
-2. Enter your name and reason
-3. Select page number
-4. Optionally add timestamp
-5. Click "Sign PDF"
+### Merge PDFs
+1. Load the first PDF via the file picker
+2. Click the **Tools** tab → **Merge** → **Start**
+3. Select additional PDF files to append
+4. Click **Merge & Download**
 
-#### 3. Watermark
-1. Click "Sign & Stamp" → "Add Watermark"
-2. Enter watermark text
-3. Adjust opacity
-4. Click "Add Watermark"
-
-## ⚙️ Settings
-
-Access settings via the gear icon in the extension popup:
-
-### Compression
-- **Default Level** - Low/Medium/High
-- Controls file size reduction quality
-
-### Security
-- **Encryption Method** - AES-256, AES-128, or RC4
-- **Remember Passwords** - Convenience vs. security trade-off
-- **Password Storage** - Local/Sync options
-
-### Download & Storage
-- **Auto-download** - Automatically save processed PDFs
-- **Storage Limit** - Maximum cache size in MB
-
-### Appearance
-- **Theme** - Light/Dark/Auto
-- **Notifications** - Enable/disable notifications
-
-### Privacy
-- **Analytics** - Help improve extension
-- **Crash Reports** - Send error information
-
-## 🔐 Security Considerations
-
-### Important Notes
-1. **Password Storage** - Passwords are NOT stored unless explicitly enabled in settings
-2. **Local Processing** - All PDF operations occur locally; files are not sent to servers
-3. **Encryption** - Uses industry-standard AES-256 encryption by default
-4. **No Tracking** - Analytics can be disabled in settings
-
-### Best Practices
-- Use strong passwords (12+ characters, mix of types)
-- Don't share encrypted PDF passwords
-- Regularly clear cached data
-- Keep the extension updated
-- Review permissions periodically
+### Add a Watermark
+1. Load a PDF and click **Protect** → **Add Watermark**
+2. Enter your watermark text and choose placement, opacity, and colour
+3. Preview updates live — click **Add Watermark** when ready
 
 ## 🐛 Troubleshooting
 
-### Common Issues
-
 **Extension doesn't appear after installation?**
-- Check if the extension is enabled in your browser's extensions settings
+- Check if the extension is enabled in your browser's extension settings
 - Try restarting Microsoft Edge
 
-**PDF files not being processed?**
-- Ensure the PDF is a valid PDF file
-- Check browser console for error messages
-- Try a different PDF file
+**PDF not loading?**
+- Ensure the file is a valid PDF
+- Try a different PDF to rule out file corruption
 
 **Encryption not working?**
-- Verify password is not empty
-- Check browser storage permissions
-- Clear extension cache and retry
+- Verify the password field is not empty
+- Clear extension storage in settings and retry
 
 **Performance issues with large PDFs?**
-- Try using a lower compression level
-- Split large PDFs into smaller files
-- Close other browser tabs to free memory
+- Split large PDFs into smaller files first
+- Close unused browser tabs to free memory
 
 ## 📚 Documentation
 
-- [API Reference](docs/API.md) - Detailed API documentation
-- [Security Policy](docs/SECURITY.md) - Security information and vulnerability reporting
+- [API Reference](docs/API.md)
+- [Security Policy](docs/SECURITY.md)
+- [Store Listing Copy](storeassets/description.md)
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License — see [LICENSE](LICENSE) for details.
 
 ## 🙏 Acknowledgments
 
-- [PDF-lib](https://pdf-lib.js.org/) - PDF manipulation library
-- [PDF.js](https://mozilla.github.io/pdf.js/) - PDF rendering engine
-- [Crypto-JS](https://cryptojs.gitbook.io/) - Cryptography library
-- WebExtension documentation and community
+- [PDF-lib](https://pdf-lib.js.org/) — PDF manipulation library
+- [PDF.js](https://mozilla.github.io/pdf.js/) — PDF rendering engine
+- [Crypto-JS](https://cryptojs.gitbook.io/) — Cryptography library
 
 ## 📞 Support
 
-For support, please visit the [Zozimus Technologies website](https://zozimustechnologies.github.io/) or [report an issue on GitHub](https://github.com/zozimustechnologies/pdftools/issues/).
+Visit the [Zozimus Technologies website](https://zozimustechnologies.github.io/) or [report an issue on GitHub](https://github.com/zozimustechnologies/pdftools/issues/).
 
 ## 🔄 Changelog
 
 ### v1.0.0 (Current)
 - Initial release
-- Core PDF tools (compress, extract, merge, rotate, split)
-- Security features (encryption, decryption, signatures)
-- Advanced features (watermarks, stamps, timestamps)
-- Settings panel with customization options
-- Modern menu bar UI
+- Side panel UI with brand blue gradient theme
+- Extract, merge, rotate, split, and metadata editing
+- AES-256 password protection with granular permissions
+- Digital signatures with draw canvas and full customisation
+- Watermarks with live preview
+- Document info tab
+- Settings: auto-download, notifications, language
+- Store assets generated via Puppeteer
+- 100% local processing — no uploads
 
 ---
 
 **Developed by [Zozimus Technologies](https://zozimustechnologies.github.io/)**
-*Enterprise-grade PDF solutions for modern businesses*
+*Privacy-first PDF solutions for Microsoft Edge*

@@ -1,9 +1,12 @@
 {
   "manifest_version": 3,
-  "name": "PDF Tools",
+  "name": "PDF Tools by Zozimus",
+  "short_name": "PDF Tools",
   "version": "1.0.0",
-  "description": "Enterprise PDF processing - password protection, digital signatures, compression, watermarks, and advanced security features",
-  "author": "Zozimus technologies",
+  "description": "Password protect, sign, watermark, merge, split, rotate & extract PDF pages — 100% local, no uploads.",
+  "author": {
+    "email": "zozimustechnologies@outlook.com"
+  },
   "permissions": [
     "activeTab",
     "scripting",

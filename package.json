@@ -1,7 +1,10 @@
 {
   "name": "PDF Tools",
   "version": "1.0.0",
-  "description": "Enterprise PDF processing - password protection, digital signatures, compression, watermarks, and advanced security features",
+  "description": "Password protect, sign, watermark, merge, split, rotate & extract PDF pages — 100% local, no uploads.",
+  "scripts": {
+    "generate-assets": "node scripts/generate-store-assets.js"
+  },
   "keywords": [
     "pdf",
     "tools",
@@ -13,5 +16,8 @@
     "watermark"
   ],
   "author": "Zozimus Technologies",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "puppeteer": "^25.1.0"
+  }
 }
