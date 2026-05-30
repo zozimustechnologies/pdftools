@@ -441,9 +441,8 @@ npm run docs
 ## 📞 Support
 
 - **Documentation:** See docs/ folder
-- **Issues:** GitHub Issues
-- **Questions:** help@pdftools.dev
-- **Security:** security@pdftools.dev
+- **Issues:** [GitHub Issues](https://github.com/zozimustechnologies/pdftools/issues/)
+- **Website:** [Zozimus Technologies](https://zozimustechnologies.github.io/)
 
 ---
 

@@ -836,7 +836,7 @@ body {
   justify-content: center;
   background: none;
   border: none;
-  color: #3d7ea6;
+  color: white;
   padding: 4px;
   border-radius: 50%;
   cursor: pointer;
@@ -851,8 +851,8 @@ body {
 }
 
 .settings-icon-btn:hover {
-  background: #eef4f8;
-  color: #1a4a6e;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
   transform: rotate(30deg);
 }
 

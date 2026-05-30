@@ -32,7 +32,7 @@ yarn-error.log*
 coverage/
 .nyc_output/
 
-# Chrome Extension
+# Browser Extension
 *.pem
 web-ext-artifacts/
 

@@ -59,14 +59,13 @@ For strong encryption:
 ## Vulnerability Reporting
 
 ### Security Issues
-If you discover a security vulnerability, please email:
-**security@zozimus.com**
+If you discover a security vulnerability, please contact Zozimus Technologies via the [website](https://zozimustechnologies.github.io/).
 
 **Please do not open public issues for security vulnerabilities.**
-Zozimus Technologies takes security seriously and will respond within 24 hours.
+Zozimus Technologies takes security seriously.
 
 ### Reporting Process
-1. Email details of the vulnerability
+1. Contact us with details of the vulnerability
 2. Include reproduction steps if possible
 3. Allow 48 hours for initial response
 4. Coordinate disclosure timeline
@@ -144,11 +143,9 @@ All dependencies are audited for known vulnerabilities using:
 ## Support
 
 For security questions or concerns:
-- Email: **security@zozimus.com**
-- Phone: +1-XXX-XXX-XXXX (Enterprise)
-- GitHub: [Security Issues](https://github.com/zozimus-tech/pdftools/security)
+- Issues: [GitHub Issues](https://github.com/zozimustechnologies/pdftools/issues/)
+- Website: [Zozimus Technologies](https://zozimustechnologies.github.io/)
 - Documentation: [README.md](../README.md)
-- Enterprise Support: contact@zozimus.com
 
 ---
 

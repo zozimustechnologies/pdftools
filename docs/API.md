@@ -10,7 +10,7 @@ PDF Tools uses WebExtension APIs and custom message passing to handle PDF operat
 ┌─────────────────┐
 │  Web Page       │
 └────────┬────────┘
-         │ chrome.runtime.sendMessage()
+         │ browser.runtime.sendMessage()
 ┌────────▼────────┐
 │ Content Script  │
 └────────┬────────┘
@@ -58,7 +58,7 @@ PDF Tools uses WebExtension APIs and custom message passing to handle PDF operat
 Reduces PDF file size while maintaining quality.
 
 ```javascript
-chrome.runtime.sendMessage({
+browser.runtime.sendMessage({
   action: 'compressPDF',
   data: {
     file: File,              // PDF file
@@ -90,7 +90,7 @@ chrome.runtime.sendMessage({
 Extract specific pages from a PDF.
 
 ```javascript
-chrome.runtime.sendMessage({
+browser.runtime.sendMessage({
   action: 'extractPages',
   data: {
     file: File,
@@ -122,7 +122,7 @@ chrome.runtime.sendMessage({
 Combine multiple PDFs into one.
 
 ```javascript
-chrome.runtime.sendMessage({
+browser.runtime.sendMessage({
   action: 'mergePDFs',
   data: {
     files: [File, File, File],  // Array of PDF files
@@ -154,7 +154,7 @@ chrome.runtime.sendMessage({
 Rotate PDF pages.
 
 ```javascript
-chrome.runtime.sendMessage({
+browser.runtime.sendMessage({
   action: 'rotatePages',
   data: {
     file: File,
@@ -188,7 +188,7 @@ chrome.runtime.sendMessage({
 Split PDF into individual pages.
 
 ```javascript
-chrome.runtime.sendMessage({
+browser.runtime.sendMessage({
   action: 'splitPDF',
   data: {
     file: File,
@@ -222,7 +222,7 @@ chrome.runtime.sendMessage({
 Add password protection to a PDF.
 
 ```javascript
-chrome.runtime.sendMessage({
+browser.runtime.sendMessage({
   action: 'encryptPDF',
   data: {
     file: File,
@@ -267,7 +267,7 @@ chrome.runtime.sendMessage({
 Remove password protection from a PDF.
 
 ```javascript
-chrome.runtime.sendMessage({
+browser.runtime.sendMessage({
   action: 'decryptPDF',
   data: {
     file: File,
@@ -299,7 +299,7 @@ chrome.runtime.sendMessage({
 Add digital signature to a PDF.
 
 ```javascript
-chrome.runtime.sendMessage({
+browser.runtime.sendMessage({
   action: 'signPDF',
   data: {
     file: File,
@@ -342,7 +342,7 @@ chrome.runtime.sendMessage({
 Add watermark to PDF pages.
 
 ```javascript
-chrome.runtime.sendMessage({
+browser.runtime.sendMessage({
   action: 'addWatermark',
   data: {
     file: File,
@@ -381,7 +381,7 @@ chrome.runtime.sendMessage({
 Add predefined stamp to PDF.
 
 ```javascript
-chrome.runtime.sendMessage({
+browser.runtime.sendMessage({
   action: 'addStamp',
   data: {
     file: File,
@@ -465,27 +465,27 @@ await StorageUtils.clearAllStorage()
 
 ## Storage API
 
-### chrome.storage.local
+### browser.storage.local
 ```javascript
 // Save
-chrome.storage.local.set({ myKey: myValue })
+browser.storage.local.set({ myKey: myValue })
 
 // Get
-chrome.storage.local.get(['myKey'], (result) => {
+browser.storage.local.get(['myKey'], (result) => {
   console.log(result.myKey);
 })
 
 // Clear
-chrome.storage.local.clear()
+browser.storage.local.clear()
 ```
 
-### chrome.storage.sync
+### browser.storage.sync
 ```javascript
 // Synced across user's devices
-chrome.storage.sync.set({ setting: value })
+browser.storage.sync.set({ setting: value })
 
 // Listen for changes
-chrome.storage.onChanged.addListener((changes, namespace) => {
+browser.storage.onChanged.addListener((changes, namespace) => {
   if (namespace === 'sync') {
     console.log('Settings changed:', changes);
   }
@@ -497,7 +497,7 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
 ### Common Errors
 
 ```javascript
-chrome.runtime.sendMessage(message, response => {
+browser.runtime.sendMessage(message, response => {
   if (response.success) {
     console.log('Success:', response.data);
   } else {
@@ -549,7 +549,7 @@ const fileInput = document.getElementById('pdfInput');
 const file = fileInput.files[0];
 
 // Send encryption request
-chrome.runtime.sendMessage({
+browser.runtime.sendMessage({
   action: 'encryptPDF',
   data: {
     file: file,
@@ -588,6 +588,5 @@ chrome.runtime.sendMessage({
 ## Support
 
 - Documentation: [README.md](../README.md)
-- Issues: [GitHub Issues](https://github.com/zozimus-tech/pdftools/issues)
-- Email: api@zozimus.com
-- Website: [zozimus.com](https://zozimus.com)
+- Issues: [GitHub Issues](https://github.com/zozimustechnologies/pdftools/issues/)
+- Website: [Zozimus Technologies](https://zozimustechnologies.github.io/)

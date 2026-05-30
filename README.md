@@ -30,21 +30,12 @@ A comprehensive and powerful browser extension for PDF manipulation with advance
 
 ## 🚀 Installation
 
-### From Source (Development)
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/zozimus-tech/pdftools.git
-   cd pdftools
-   ```
+PDF Tools is available on the **Microsoft Edge Add-on Store**.
 
-2. Open your browser and go to the extensions page (e.g., `edge://extensions/` or `about:addons`)
-
-3. Enable "Developer mode" (toggle in the top right)
-
-4. Click "Load unpacked" and select the `pdftools` directory
-
-### From the Extension Store
-PDF Tools by Zozimus Technologies is available on the browser extension store.
+1. Open Microsoft Edge and visit the [Edge Add-on Store](https://microsoftedge.microsoft.com/addons/)
+2. Search for **"PDF Tools by Zozimus Technologies"**
+3. Click **"Get"** and confirm the installation
+4. The PDF Tools icon will appear in your browser toolbar
 
 ## 📋 Project Structure
 
@@ -80,12 +71,6 @@ pdftools/
     └── SECURITY.md          # Security policy
 ```
 
-## 🛠️ Development
-
-### Prerequisites
-- Any modern browser (Firefox, Edge, Brave, Opera)
-- Code editor (VS Code recommended)
-- Node.js (for build tools, optional)
 
 ### File Descriptions
 
@@ -179,8 +164,8 @@ Access settings via the gear icon in the extension popup:
 ### Common Issues
 
 **Extension doesn't appear after installation?**
-- Check if extension is enabled in your browser's extensions page
-- Try refreshing the page (Ctrl+Shift+R)
+- Check if the extension is enabled in your browser's extensions settings
+- Try restarting Microsoft Edge
 
 **PDF files not being processed?**
 - Ensure the PDF is a valid PDF file
@@ -201,19 +186,6 @@ Access settings via the gear icon in the extension popup:
 
 - [API Reference](docs/API.md) - Detailed API documentation
 - [Security Policy](docs/SECURITY.md) - Security information and vulnerability reporting
-- [Contributing Guide](docs/CONTRIBUTING.md) - How to contribute to the project
-
-## 🤝 Contributing
-
-Zozimus Technologies welcomes contributions from the community! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Submit a Pull Request with your improvements
-
-See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for detailed guidelines.
 
 ## 📝 License
 
@@ -228,9 +200,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Report Issues** - [GitHub Issues](https://github.com/zozimus-tech/pdftools/issues)
-- **Feature Requests** - [GitHub Discussions](https://github.com/zozimus-tech/pdftools/discussions)
-- **Email Support** - support@zozimus.com
+For support, please visit the [Zozimus Technologies website](https://zozimustechnologies.github.io/) or [report an issue on GitHub](https://github.com/zozimustechnologies/pdftools/issues/).
 
 ## 🔄 Changelog
 
@@ -244,5 +214,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Developed by [Zozimus Technologies](https://zozimus.com)**
+**Developed by [Zozimus Technologies](https://zozimustechnologies.github.io/)**
 *Enterprise-grade PDF solutions for modern businesses*

@@ -86,8 +86,8 @@ await StorageUtils.clearAllStorage()         // Clear all
 
 **Sending a message from popup to content script:**
 ```javascript
-chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-  chrome.tabs.sendMessage(tabs[0].id, {
+browser.tabs.query({active: true, currentWindow: true}, (tabs) => {
+  browser.tabs.sendMessage(tabs[0].id, {
     action: 'actionName',
     data: { /* parameters */ }
   }, response => {
@@ -222,10 +222,9 @@ Before submitting changes:
 - [PDF.js Docs](https://mozilla.github.io/pdf.js/)
 
 ### Community
-- GitHub Issues: Report bugs
+- [GitHub Issues](https://github.com/zozimustechnologies/pdftools/issues/): Report bugs
 - GitHub Discussions: Share ideas
 - Stack Overflow: Ask questions
-- Email: support@pdftools.dev
 
 ---
 
@@ -258,10 +257,9 @@ See [LICENSE](../LICENSE) for details.
 ## Support
 
 - **Questions?** Check [FAQ](#faq) below
-- **Bug?** Open GitHub issue
+- **Bug?** [Open a GitHub issue](https://github.com/zozimustechnologies/pdftools/issues/)
 - **Suggestion?** Start discussion
-- **Email:** support@zozimus.com
-- **Website:** zozimus.com
+- **Website:** [Zozimus Technologies](https://zozimustechnologies.github.io/)
 
 ---
 
